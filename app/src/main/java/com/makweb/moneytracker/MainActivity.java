@@ -1,21 +1,25 @@
 package com.makweb.moneytracker;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
 
     final String TAG="main activity";
-    private TextView txtHelloText;
+
+    private Toolbar toolbar;
+
+
+   /* private TextView txtHelloText;
     private Button btnShowToast;
-    private CoordinatorLayout clayMainActivity;
+    private CoordinatorLayout clayMainActivity;*/
 
 
     @Override
@@ -23,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        clayMainActivity = (CoordinatorLayout)findViewById(R.id.coordinatorLayout);
+        setupToolbar();
+
+     /*   clayMainActivity = (CoordinatorLayout)findViewById(R.id.coordinatorLayout);
         txtHelloText = (TextView)findViewById(R.id.textHello);
         btnShowToast = (Button)findViewById(R.id.button);
         btnShowToast.setOnClickListener(new View.OnClickListener() {
@@ -33,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                         .make(clayMainActivity, "my first snack", Snackbar.LENGTH_LONG);
                 snackbar.show();
             }
-        });
+        });*/
 
         Log.d(TAG, "MainActivity: onCreate()");
 
@@ -67,5 +73,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "MainActivity: onDestroy()");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "MainActivity: onRestart()");
+    }
+
+    @Override
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+        Log.d(TAG, "MainActivity: onCreateView()");
+        return super.onCreateView(name, context, attrs);
+    }
+
+    private  void setupToolbar(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar!=null){
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24px);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 }
