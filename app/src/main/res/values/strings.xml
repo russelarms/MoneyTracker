@@ -9,4 +9,9 @@
     <string name="navDrawer_categories">Категории</string>
     <string name="navDrawer_statistics">Статистика</string>
     <string name="navDrawer_settings">Настройки</string>
+    <string name="txt_user_name">Макеев Михаил</string>
+    <string name="txt_email_address">makweb@yandex.ru</string>
+
+    <string name="font_family_roboto_regular">sans-serif</string>
+    <string name="font_family_roboto_medium">sans-serif-medium</string>
 </resources>
