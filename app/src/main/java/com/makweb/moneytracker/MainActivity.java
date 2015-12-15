@@ -1,40 +1,39 @@
 package com.makweb.moneytracker;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
 
     final String TAG="main activity";
-    private TextView txtHelloText;
-    private Button btnShowToast;
-    private CoordinatorLayout clayMainActivity;
+
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private CoordinatorLayout coordinatorLayout;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_container);
 
-        clayMainActivity = (CoordinatorLayout)findViewById(R.id.coordinatorLayout);
-        txtHelloText = (TextView)findViewById(R.id.textHello);
-        btnShowToast = (Button)findViewById(R.id.button);
-        btnShowToast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar snackbar = Snackbar
-                        .make(clayMainActivity, "my first snack", Snackbar.LENGTH_LONG);
-                snackbar.show();
-            }
-        });
-
+        setupToolbar();
+        setupDrawer();
         Log.d(TAG, "MainActivity: onCreate()");
 
     }
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart (){
         super.onStart();
-        Log.d(TAG,"MainActivity: onStart()");
+        Log.d(TAG, "MainActivity: onStart()");
     }
 
     @Override
@@ -67,5 +66,41 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "MainActivity: onDestroy()");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "MainActivity: onRestart()");
+    }
+
+    @Override
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+        Log.d(TAG, "MainActivity: onCreateView()");
+        return super.onCreateView(name, context, attrs);
+    }
+
+    private  void setupToolbar(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar!=null){
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24px);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    private void setupDrawer(){
+        drawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
+        NavigationView navigationView=(NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                Snackbar.make(coordinatorLayout, item.getTitle(), Snackbar.LENGTH_SHORT).show();
+                item.setChecked(true);
+                drawerLayout.closeDrawers();
+                return false;
+            }
+        });
     }
 }
