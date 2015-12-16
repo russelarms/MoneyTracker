@@ -13,6 +13,10 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -22,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private CoordinatorLayout coordinatorLayout;
+    //private ListView expensesListView;
+    private  ExpenseAdapter expenseAdapter;
 
 
 
@@ -30,8 +36,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ListView expensesListView = (ListView) findViewById(R.id.list_view);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_container);
 
+        List<Expense> adapterData = getDataList();
+        expenseAdapter=new ExpenseAdapter(this, adapterData);
+        expensesListView.setAdapter(expenseAdapter);
         setupToolbar();
         setupDrawer();
         Log.d(TAG, "MainActivity: onCreate()");
@@ -82,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     private  void setupToolbar(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //toolbar.setTitleTextColor('#000000');
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar!=null){
@@ -102,5 +114,14 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private List<Expense> getDataList(){
+        List<Expense> data = new ArrayList<>();
+        data.add(new Expense("Phone","1000"));
+        data.add(new Expense("Clothes","2000"));
+        data.add(new Expense("Gifts","500"));
+        data.add(new Expense("Holidays","5000"));
+        return data;
     }
 }
