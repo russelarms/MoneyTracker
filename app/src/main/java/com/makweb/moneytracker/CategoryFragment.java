@@ -14,20 +14,23 @@ public class CategoryFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ExpenseAdapter expenseAdapter;
-        View mainView=inflater.inflate(R.layout.other_fragment,container,false);
+        CategoryAdapter categoryAdapter;
+        View mainView=inflater.inflate(R.layout.category_fragment,container,false);
         ListView expensesListView = (ListView) mainView.findViewById(R.id.list_view);
-        List<Expense> adapterData = getDataList();
-        expenseAdapter=new ExpenseAdapter(getActivity(), adapterData);
-        expensesListView.setAdapter(expenseAdapter);
-        getActivity().setTitle("Все остально");
+        List<Category> adapterData = getDataList();
+        categoryAdapter=new CategoryAdapter(getActivity(), adapterData);
+        expensesListView.setAdapter(categoryAdapter);
+        getActivity().setTitle("Категории");
         return mainView;
     }
 
-    private List<Expense> getDataList(){
-        List<Expense> data = new ArrayList<>();
-        data.add(new Expense("Phone","1000"));
-        data.add(new Expense("Clothes","2000"));
+    private List<Category> getDataList(){
+        List<Category> data = new ArrayList<>();
+        data.add(new Category(1000,"Книги"));
+        data.add(new Category(2000, "Одежда"));
+        data.add(new Category(2000, "Еда"));
         return data;
     }
+
+
 }

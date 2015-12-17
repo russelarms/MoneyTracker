@@ -24,11 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private CoordinatorLayout coordinatorLayout;
     private Fragment fragment;
 
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
            getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new ExpensesFragment()).commit();
         }
         Log.d(TAG, "MainActivity: onCreate()");
+
 
     }
 

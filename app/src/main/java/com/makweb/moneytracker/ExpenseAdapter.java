@@ -36,14 +36,16 @@ public class ExpenseAdapter extends ArrayAdapter<Expense> {
         RelativeLayout list_item=(RelativeLayout) convertView.findViewById(R.id.list_item);
 
         int myColor=getContext().getResources().getColor(R.color.colorAccent);
-        float opacity=1-position*0.2f;
+        float opacity=1- position*1.0f/getCount();
         int myBgColor = adjustAlpha(myColor, opacity);
 
         list_item.setBackgroundColor(myBgColor);
 
-        name.setText(expense.title);
-        sum.setText(expense.sum.toString());
-        date.setText(expense.date);
+        //Log.d("ADAPTER", String.valueOf(opacity));
+
+        name.setText(expense.getTitle());
+        sum.setText(expense.getSum().toString());
+        date.setText(expense.getDate());
         return convertView;
     }
 

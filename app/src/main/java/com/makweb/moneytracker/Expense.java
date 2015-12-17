@@ -6,10 +6,10 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class Expense {
-    public String title;
-    public Integer sum;
-    public String date;
-    public DateFormat dateFormat=new SimpleDateFormat("dd-MM-yyyy",new Locale("ru"));
+    private String title;
+    private Integer sum;
+    private String date;
+    private DateFormat dateFormat=new SimpleDateFormat("dd-MM-yyyy",new Locale("ru"));
 
     public Expense() {
     }
