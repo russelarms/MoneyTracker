@@ -1,22 +1,30 @@
 package com.makweb.moneytracker;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class Expense {
     public String title;
-    public String sum;
+    public Integer sum;
+    public String date;
+    public DateFormat dateFormat=new SimpleDateFormat("dd-MM-yyyy",new Locale("ru"));
 
     public Expense() {
     }
 
     public Expense(String title, String sum) {
         this.title = title;
-        this.sum = sum;
+        this.sum = Integer.parseInt(sum);
+        this.date=dateFormat.format(Calendar.getInstance().getTime());
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getSum() {
+    public Integer getSum() {
         return sum;
     }
 
@@ -25,6 +33,14 @@ public class Expense {
     }
 
     public void setSum(String sum) {
-        this.sum = sum;
+        this.sum = Integer.parseInt(sum);
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date=dateFormat.format(Calendar.getInstance().getTime());
     }
 }

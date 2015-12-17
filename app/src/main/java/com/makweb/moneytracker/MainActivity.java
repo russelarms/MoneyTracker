@@ -113,10 +113,19 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
-                if (item.getItemId() == R.id.drawer_expenses) {
-                    fragment= new ExpensesFragment();
-                } else {
-                    fragment=new OtherFragment();
+                switch (item.getItemId()){
+                    case R.id.drawer_expenses:
+                        fragment= new ExpensesFragment();
+                        break;
+                    case R.id.drawer_categories:
+                        fragment= new CategoryFragment();
+                        break;
+                    case R.id.drawer_statistics:
+                        fragment= new StatisticFragment();
+                        break;
+                    case R.id.drawer_settings:
+                        fragment= new SettingFragment();
+                        break;
                 }
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fragment).addToBackStack(null).commit();
