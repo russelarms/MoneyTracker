@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
     private CoordinatorLayout coordinatorLayout;
     private Fragment fragment;
 
@@ -105,22 +107,26 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupDrawer(){
         drawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
-        NavigationView navigationView=(NavigationView) findViewById(R.id.navigation_view);
+        navigationView=(NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.drawer_expenses:
-                        fragment= new ExpensesFragment();
+                        fragment = new ExpensesFragment();
+                        navigationView.getMenu().findItem(R.id.drawer_expenses).setChecked(true);
                         break;
                     case R.id.drawer_categories:
-                        fragment= new CategoryFragment();
+                        fragment = new CategoryFragment();
+                        navigationView.getMenu().findItem(R.id.drawer_categories).setChecked(true);
                         break;
                     case R.id.drawer_statistics:
-                        fragment= new StatisticFragment();
+                        fragment = new StatisticFragment();
+                        navigationView.getMenu().findItem(R.id.drawer_statistics).setChecked(true);
                         break;
                     case R.id.drawer_settings:
-                        fragment= new SettingFragment();
+                        fragment = new SettingFragment();
+                        navigationView.getMenu().findItem(R.id.drawer_settings).setChecked(true);
                         break;
                 }
 
@@ -136,10 +142,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         Fragment findingFragment = getSupportFragmentManager().findFragmentById(R.id.main_frame);
         if (findingFragment!=null && findingFragment instanceof ExpensesFragment ){
             getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
+        if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
+            drawerLayout.closeDrawer(Gravity.LEFT);
+        }else{
+            super.onBackPressed();
+        }
+
     }
 }
