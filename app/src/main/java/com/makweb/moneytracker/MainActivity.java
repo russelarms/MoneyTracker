@@ -1,22 +1,18 @@
 package com.makweb.moneytracker;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private CoordinatorLayout coordinatorLayout;
-    //private ListView expensesListView;
-    private  ExpenseAdapter expenseAdapter;
+    private Fragment fragment;
+
+
 
 
 
@@ -37,19 +34,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView expensesListView = (ListView) findViewById(R.id.list_view);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_container);
 
-        List<Expense> adapterData = getDataList();
-        expenseAdapter=new ExpenseAdapter(this, adapterData);
-        expensesListView.setAdapter(expenseAdapter);
         setupToolbar();
         setupDrawer();
+       if (savedInstanceState==null){
+           getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new ExpensesFragment()).commit();
+        }
         Log.d(TAG, "MainActivity: onCreate()");
 
     }
 
-    @Override
+/*    @Override
     protected void onStart (){
         super.onStart();
         Log.d(TAG, "MainActivity: onStart()");
@@ -89,11 +85,10 @@ public class MainActivity extends AppCompatActivity {
     public View onCreateView(String name, Context context, AttributeSet attrs) {
         Log.d(TAG, "MainActivity: onCreateView()");
         return super.onCreateView(name, context, attrs);
-    }
+    }*/
 
     private  void setupToolbar(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //toolbar.setTitleTextColor('#000000');
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar!=null){
@@ -102,12 +97,30 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id=item.getItemId();
+        if(id==android.R.id.home){
+            drawerLayout.openDrawer(GravityCompat.START);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setupDrawer(){
         drawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView=(NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
+                if (item.getItemId() == R.id.drawer_expenses) {
+                    fragment= new ExpensesFragment();
+                } else {
+                    fragment=new OtherFragment();
+                }
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fragment).addToBackStack(null).commit();
+
                 Snackbar.make(coordinatorLayout, item.getTitle(), Snackbar.LENGTH_SHORT).show();
                 item.setChecked(true);
                 drawerLayout.closeDrawers();
@@ -116,12 +129,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private List<Expense> getDataList(){
-        List<Expense> data = new ArrayList<>();
-        data.add(new Expense("Phone","1000"));
-        data.add(new Expense("Clothes","2000"));
-        data.add(new Expense("Gifts","500"));
-        data.add(new Expense("Holidays","5000"));
-        return data;
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Fragment findingFragment = getSupportFragmentManager().findFragmentById(R.id.main_frame);
+        if (findingFragment!=null && findingFragment instanceof ExpensesFragment ){
+            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
     }
 }
