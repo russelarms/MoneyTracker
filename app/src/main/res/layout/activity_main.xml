@@ -14,26 +14,47 @@
         android:id="@+id/coordinator_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        >
+        android:fitsSystemWindows="true">
 
-        <android.support.design.widget.AppBarLayout
+        <!--<android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay">
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-        </android.support.design.widget.AppBarLayout>
-
-        <include layout="@layout/content_main" />
 
 
+
+        </android.support.design.widget.AppBarLayout>-->
+
+        <!--<include layout="@layout/content_main" />-->
+
+        <RelativeLayout
+            android:id="@+id/main_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
+
+           <FrameLayout
+               android:id="@+id/main_frame"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_below="@+id/toolbar">
+
+           </FrameLayout>
+        </RelativeLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_margin="@dimen/abc_floating_window_z"
+            android:src="@drawable/ic_add_black_24px"
+            app:layout_anchor="@id/coordinator_container"
+            app:layout_anchorGravity="bottom|right"
+            app:layout_behavior=".ScrollFABBehavior"/>
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
