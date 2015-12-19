@@ -1,59 +1,52 @@
 package com.makweb.moneytracker;
 
-import android.content.Context;
-import android.graphics.Color;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
 
-public class ExpenseAdapter extends ArrayAdapter<Expense> {
+public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.CardViewHolder> {
     List<Expense> expenses;
 
-
-
-    public ExpenseAdapter(Context context, List<Expense> expenses) {
-        super(context, 0, expenses);
+    public ExpenseAdapter(List<Expense> expenses){
         this.expenses=expenses;
-
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        Expense expense=getItem(position);
-        if (convertView==null){
-            convertView= LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
-        }
-
-        TextView name = (TextView) convertView.findViewById(R.id.txt_name);
-        TextView sum = (TextView) convertView.findViewById(R.id.txt_sum);
-        TextView date=(TextView) convertView.findViewById(R.id.txt_date);
-        RelativeLayout list_item=(RelativeLayout) convertView.findViewById(R.id.list_item);
-
-        int myColor=getContext().getResources().getColor(R.color.colorAccent);
-        float opacity=1- position*1.0f/getCount();
-        int myBgColor = adjustAlpha(myColor, opacity);
-
-        list_item.setBackgroundColor(myBgColor);
-
-        //Log.d("ADAPTER", String.valueOf(opacity));
-
-        name.setText(expense.getTitle());
-        sum.setText(expense.getSum().toString());
-        date.setText(expense.getDate());
-        return convertView;
+    public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View convertView= LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        return new CardViewHolder(convertView);
     }
 
-    public int adjustAlpha(int color, float factor) {
-        int alpha = Math.round(Color.alpha(color) * factor);
-        int red = Color.red(color);
-        int green = Color.green(color);
-        int blue = Color.blue(color);
-        return Color.argb(alpha, red, green, blue);
+    @Override
+    public void onBindViewHolder(CardViewHolder holder, int position) {
+        Expense expense=expenses.get(position);
+
+        holder.txt_name.setText(expense.getTitle());
+       holder.txt_sum.setText(String.valueOf(expense.getSum()));
+        holder.txt_date.setText(expense.getDate());
+    }
+
+    @Override
+    public int getItemCount() {
+        return expenses.size();
+    }
+
+    public class CardViewHolder extends RecyclerView.ViewHolder{
+
+        protected TextView txt_name;
+        protected TextView txt_sum;
+        protected TextView txt_date;
+
+        public CardViewHolder(View convertView) {
+            super(convertView);
+            txt_name=(TextView) convertView.findViewById(R.id.txt_name);
+            txt_sum=(TextView) convertView.findViewById(R.id.txt_sum);
+            txt_date=(TextView) convertView.findViewById(R.id.txt_date);
+        }
     }
 }

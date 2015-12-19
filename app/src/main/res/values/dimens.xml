@@ -12,6 +12,7 @@
     <dimen name="drawer_header_avatar_size">60dp</dimen>
     <dimen name="drawer_header_avatar_margin_top">16dp</dimen>
     <dimen name="drawer_header_line_spacing">4dp</dimen>
-
+    <dimen name="card_corners_radius">2dp</dimen>
+    <dimen name="card_margin">8dp</dimen>
 
 </resources>

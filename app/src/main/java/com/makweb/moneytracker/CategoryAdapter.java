@@ -23,11 +23,11 @@ public class CategoryAdapter extends ArrayAdapter<Category> {
             convertView= LayoutInflater.from(getContext()).inflate(R.layout.category_item, parent, false);
         }
 
-        TextView name = (TextView) convertView.findViewById(R.id.txt_name);
-        TextView sum = (TextView) convertView.findViewById(R.id.txt_sum);
+        TextView txt_name = (TextView) convertView.findViewById(R.id.txt_name);
+        TextView txt_sum = (TextView) convertView.findViewById(R.id.txt_sum);
 
-        name.setText(categories.getName());
-        sum.setText(String.valueOf(categories.getSum()));
+        txt_name.setText(categories.getName());
+        txt_sum.setText(String.valueOf(categories.getSum()));
 
         return convertView;
     }
