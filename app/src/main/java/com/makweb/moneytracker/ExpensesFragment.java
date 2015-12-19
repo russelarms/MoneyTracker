@@ -1,7 +1,6 @@
 package com.makweb.moneytracker;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpensesFragment extends Fragment{
+public class ExpensesFragment extends BaseFragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -21,6 +20,7 @@ public class ExpensesFragment extends Fragment{
         expenseAdapter=new ExpenseAdapter(getActivity(), adapterData);
         expensesListView.setAdapter(expenseAdapter);
         getActivity().setTitle("Траты");
+        setItemDrawer(R.id.drawer_expenses);
         return mainView;
     }
 

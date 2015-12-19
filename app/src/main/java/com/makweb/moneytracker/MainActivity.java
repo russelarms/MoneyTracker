@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
 /*    @Override
     protected void onStart (){
         super.onStart();
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupDrawer(){
+    public void setupDrawer(){
         drawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView=(NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -142,10 +143,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Fragment findingFragment = getSupportFragmentManager().findFragmentById(R.id.main_frame);
-        if (findingFragment!=null && findingFragment instanceof ExpensesFragment ){
+        BaseFragment findingFragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.main_frame);
+        if (findingFragment!=null && findingFragment instanceof ExpensesFragment){
             getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
+
         if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
             drawerLayout.closeDrawer(Gravity.LEFT);
         }else{
