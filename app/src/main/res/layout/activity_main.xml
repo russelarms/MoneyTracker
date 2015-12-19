@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right|bottom"
             android:layout_margin="@dimen/abc_floating_window_z"
-            android:src="@drawable/abc_btn_rating_star_off_mtrl_alpha"
+            android:src="@drawable/ic_add_black_24px"
             app:layout_anchor="@id/coordinator_container"
             app:layout_anchorGravity="bottom|right"
             app:layout_behavior=".ScrollFABBehavior"/>

@@ -15,6 +15,7 @@ public class VectorDraw extends Application {
                 R.drawable.ic_account_balance_wallet_black_24px,
                 R.drawable.ic_settings_black_24px,
                 R.drawable.ic_timeline_black_24px,
-                R.drawable.ic_view_list_black_24px);
+                R.drawable.ic_view_list_black_24px,
+                R.drawable.ic_add_black_24px);
     }
 }

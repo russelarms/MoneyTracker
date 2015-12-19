@@ -22,7 +22,7 @@ public class ExpensesFragment extends BaseFragment{
         expenseAdapter=new ExpenseAdapter(adapterData);
         expensesRecyclerView.setAdapter(expenseAdapter);
 
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),2);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),1);
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         expensesRecyclerView.setLayoutManager(gridLayoutManager);
 
