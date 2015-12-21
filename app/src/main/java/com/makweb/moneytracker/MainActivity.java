@@ -2,7 +2,6 @@ package com.makweb.moneytracker;
 
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -15,12 +14,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.View;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    final String TAG="main activity";
+    final String TAG = "main activity";
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -37,68 +35,19 @@ public class MainActivity extends AppCompatActivity {
 
         setupToolbar();
         setupDrawer();
-        if (savedInstanceState==null){
-           getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new ExpensesFragment()).commit();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new ExpensesFragment()).commit();
         }
         Log.d(TAG, "MainActivity: onCreate()");
 
-        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(coordinatorLayout, "other", Snackbar.LENGTH_SHORT).show();
-            }
-        });
+
     }
 
-
-/*    @Override
-    protected void onStart (){
-        super.onStart();
-        Log.d(TAG, "MainActivity: onStart()");
-    }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
-        Log.d(TAG, "MainActivity: onResume()");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "MainActivity: onPause()");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "MainActivity: onStop()");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "MainActivity: onDestroy()");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(TAG, "MainActivity: onRestart()");
-    }
-
-    @Override
-    public View onCreateView(String name, Context context, AttributeSet attrs) {
-        Log.d(TAG, "MainActivity: onCreateView()");
-        return super.onCreateView(name, context, attrs);
-    }*/
-
-    private  void setupToolbar(){
+    private void setupToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar!=null){
+        if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24px);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -106,17 +55,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id=item.getItemId();
-        if(id==android.R.id.home){
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
             drawerLayout.openDrawer(GravityCompat.START);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupDrawer(){
-        drawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView=(NavigationView) findViewById(R.id.navigation_view);
+    private void setupDrawer() {
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -152,16 +101,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         BaseFragment findingFragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.main_frame);
-        if (findingFragment!=null && findingFragment instanceof ExpensesFragment){
+        if (findingFragment != null && findingFragment instanceof ExpensesFragment) {
             getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
 
 
-        if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
+        if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
             drawerLayout.closeDrawer(Gravity.LEFT);
-        }else{
+        } else {
             super.onBackPressed();
         }
 
     }
+
+
 }

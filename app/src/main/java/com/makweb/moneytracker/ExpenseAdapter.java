@@ -12,22 +12,22 @@ import java.util.List;
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.CardViewHolder> {
     List<Expense> expenses;
 
-    public ExpenseAdapter(List<Expense> expenses){
-        this.expenses=expenses;
+    public ExpenseAdapter(List<Expense> expenses) {
+        this.expenses = expenses;
     }
 
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View convertView= LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
         return new CardViewHolder(convertView);
     }
 
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
-        Expense expense=expenses.get(position);
+        Expense expense = expenses.get(position);
 
         holder.txt_name.setText(expense.getTitle());
-       holder.txt_sum.setText(String.valueOf(expense.getSum()));
+        holder.txt_sum.setText(String.valueOf(expense.getSum()));
         holder.txt_date.setText(expense.getDate());
     }
 
@@ -36,7 +36,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.CardView
         return expenses.size();
     }
 
-    public class CardViewHolder extends RecyclerView.ViewHolder{
+    public class CardViewHolder extends RecyclerView.ViewHolder {
 
         protected TextView txt_name;
         protected TextView txt_sum;
@@ -44,9 +44,9 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.CardView
 
         public CardViewHolder(View convertView) {
             super(convertView);
-            txt_name=(TextView) convertView.findViewById(R.id.txt_name);
-            txt_sum=(TextView) convertView.findViewById(R.id.txt_sum);
-            txt_date=(TextView) convertView.findViewById(R.id.txt_date);
+            txt_name = (TextView) convertView.findViewById(R.id.txt_name);
+            txt_sum = (TextView) convertView.findViewById(R.id.txt_sum);
+            txt_date = (TextView) convertView.findViewById(R.id.txt_date);
         }
     }
 }

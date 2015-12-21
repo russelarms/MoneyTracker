@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group
-        android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/drawer_expenses"
-            android:title="@string/navDrawer_expenses"
             android:checked="true"
             android:icon="@drawable/ic_account_balance_wallet_black_24px"
-            />
+            android:title="@string/navDrawer_expenses" />
 
         <item
             android:id="@+id/drawer_categories"
-            android:title="@string/navDrawer_categories"
-            android:icon="@drawable/ic_view_list_black_24px"/>
+            android:icon="@drawable/ic_view_list_black_24px"
+            android:title="@string/navDrawer_categories" />
         <item
             android:id="@+id/drawer_statistics"
-            android:title="@string/navDrawer_statistics"
-            android:icon="@drawable/ic_timeline_black_24px"/>
+            android:icon="@drawable/ic_timeline_black_24px"
+            android:title="@string/navDrawer_statistics" />
 
         <item
             android:id="@+id/drawer_settings"
-            android:title="@string/navDrawer_settings"
-            android:icon="@drawable/ic_settings_black_24px"/>
+            android:icon="@drawable/ic_settings_black_24px"
+            android:title="@string/navDrawer_settings" />
     </group>
 </menu>

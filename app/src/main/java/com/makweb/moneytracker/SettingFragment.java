@@ -10,7 +10,7 @@ public class SettingFragment extends BaseFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View mainView=inflater.inflate(R.layout.settings_fragment,container,false);
+        View mainView = inflater.inflate(R.layout.settings_fragment, container, false);
 
         getActivity().setTitle("Настройки");
         setItemDrawer(R.id.drawer_settings);

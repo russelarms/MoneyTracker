@@ -11,16 +11,16 @@ import java.util.List;
 
 public class CategoryAdapter extends ArrayAdapter<Category> {
 
-    public CategoryAdapter(Context context,  List<Category> categories) {
+    public CategoryAdapter(Context context, List<Category> categories) {
         super(context, 0, categories);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Category categories=getItem(position);
+        Category categories = getItem(position);
 
-        if (convertView==null){
-            convertView= LayoutInflater.from(getContext()).inflate(R.layout.category_item, parent, false);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.category_item, parent, false);
         }
 
         TextView txt_name = (TextView) convertView.findViewById(R.id.txt_name);
