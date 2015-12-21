@@ -43,7 +43,8 @@ public class ExpensesFragment extends BaseFragment {
     }
 
     public void goToAddExpense(View view){
-        Intent intent=new Intent(getActivity(), AddExpenseActivity.class);
+        Intent intent=new Intent(getActivity(), AddExpenseActivity_.class);
+        intent.putExtra("key","value");
         startActivity(intent);
     }
 
