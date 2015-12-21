@@ -1,6 +1,8 @@
 package com.makweb.moneytracker;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,76 +13,90 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpensesFragment extends BaseFragment{
+public class ExpensesFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ExpenseAdapter expenseAdapter;
-        final View mainView=inflater.inflate(R.layout.expenses_fragment,container,false);
+        final View mainView = inflater.inflate(R.layout.expenses_fragment, container, false);
         RecyclerView expensesRecyclerView = (RecyclerView) mainView.findViewById(R.id.context_recyclerview);
         List<Expense> adapterData = getDataList();
-        expenseAdapter=new ExpenseAdapter(adapterData);
+        expenseAdapter = new ExpenseAdapter(adapterData);
         expensesRecyclerView.setAdapter(expenseAdapter);
 
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),1);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         expensesRecyclerView.setLayoutManager(gridLayoutManager);
 
         getActivity().setTitle("Траты");
         setItemDrawer(R.id.drawer_expenses);
+
+        FloatingActionButton floatingActionButton = (FloatingActionButton) mainView.findViewById(R.id.fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToAddExpense(view);
+            }
+        });
+
         return mainView;
     }
 
-    private List<Expense> getDataList(){
+    public void goToAddExpense(View view){
+        Intent intent=new Intent(getActivity(), AddExpenseActivity.class);
+        startActivity(intent);
+    }
+
+    private List<Expense> getDataList() {
         List<Expense> data = new ArrayList<>();
-        data.add(new Expense("Phone","1000"));
-        data.add(new Expense("Clothes","2000"));
-        data.add(new Expense("Gifts","500"));
-        data.add(new Expense("Holidays","5000"));
-        data.add(new Expense("Clothes","2000"));
-        data.add(new Expense("Gifts","500"));
-        data.add(new Expense("Holidays","5000"));
-        data.add(new Expense("Clothes","2000"));
-        data.add(new Expense("Gifts","500"));
-        data.add(new Expense("Holidays","5000"));
-        data.add(new Expense("Clothes","2000"));
-        data.add(new Expense("Gifts","500"));
-        data.add(new Expense("Holidays","5000"));
-        data.add(new Expense("Clothes","2000"));
-        data.add(new Expense("Gifts","500"));
-        data.add(new Expense("Holidays","5000"));
-        data.add(new Expense("Phone","1000"));
-        data.add(new Expense("Clothes","2000"));
-        data.add(new Expense("Gifts","500"));
-        data.add(new Expense("Holidays","5000"));
-        data.add(new Expense("Clothes","2000"));
-        data.add(new Expense("Gifts","500"));
-        data.add(new Expense("Holidays","5000"));
-        data.add(new Expense("Clothes","2000"));
-        data.add(new Expense("Gifts","500"));
-        data.add(new Expense("Holidays","5000"));
-        data.add(new Expense("Clothes","2000"));
-        data.add(new Expense("Gifts","500"));
-        data.add(new Expense("Holidays","5000"));
-        data.add(new Expense("Clothes","2000"));
-        data.add(new Expense("Gifts","500"));
-        data.add(new Expense("Holidays","5000"));
-        data.add(new Expense("Phone","1000"));
-        data.add(new Expense("Clothes","2000"));
-        data.add(new Expense("Gifts","500"));
-        data.add(new Expense("Holidays","5000"));
-        data.add(new Expense("Clothes","2000"));
-        data.add(new Expense("Gifts","500"));
-        data.add(new Expense("Holidays","5000"));
-        data.add(new Expense("Clothes","2000"));
-        data.add(new Expense("Gifts","500"));
-        data.add(new Expense("Holidays","5000"));
-        data.add(new Expense("Clothes","2000"));
-        data.add(new Expense("Gifts","500"));
-        data.add(new Expense("Holidays","5000"));
-        data.add(new Expense("Clothes","2000"));
-        data.add(new Expense("Gifts","500"));
-        data.add(new Expense("Holidays","5000"));
+        data.add(new Expense("Phone", "1000"));
+        data.add(new Expense("Clothes", "2000"));
+        data.add(new Expense("Gifts", "500"));
+        data.add(new Expense("Holidays", "5000"));
+        data.add(new Expense("Clothes", "2000"));
+        data.add(new Expense("Gifts", "500"));
+        data.add(new Expense("Holidays", "5000"));
+        data.add(new Expense("Clothes", "2000"));
+        data.add(new Expense("Gifts", "500"));
+        data.add(new Expense("Holidays", "5000"));
+        data.add(new Expense("Clothes", "2000"));
+        data.add(new Expense("Gifts", "500"));
+        data.add(new Expense("Holidays", "5000"));
+        data.add(new Expense("Clothes", "2000"));
+        data.add(new Expense("Gifts", "500"));
+        data.add(new Expense("Holidays", "5000"));
+        data.add(new Expense("Phone", "1000"));
+        data.add(new Expense("Clothes", "2000"));
+        data.add(new Expense("Gifts", "500"));
+        data.add(new Expense("Holidays", "5000"));
+        data.add(new Expense("Clothes", "2000"));
+        data.add(new Expense("Gifts", "500"));
+        data.add(new Expense("Holidays", "5000"));
+        data.add(new Expense("Clothes", "2000"));
+        data.add(new Expense("Gifts", "500"));
+        data.add(new Expense("Holidays", "5000"));
+        data.add(new Expense("Clothes", "2000"));
+        data.add(new Expense("Gifts", "500"));
+        data.add(new Expense("Holidays", "5000"));
+        data.add(new Expense("Clothes", "2000"));
+        data.add(new Expense("Gifts", "500"));
+        data.add(new Expense("Holidays", "5000"));
+        data.add(new Expense("Phone", "1000"));
+        data.add(new Expense("Clothes", "2000"));
+        data.add(new Expense("Gifts", "500"));
+        data.add(new Expense("Holidays", "5000"));
+        data.add(new Expense("Clothes", "2000"));
+        data.add(new Expense("Gifts", "500"));
+        data.add(new Expense("Holidays", "5000"));
+        data.add(new Expense("Clothes", "2000"));
+        data.add(new Expense("Gifts", "500"));
+        data.add(new Expense("Holidays", "5000"));
+        data.add(new Expense("Clothes", "2000"));
+        data.add(new Expense("Gifts", "500"));
+        data.add(new Expense("Holidays", "5000"));
+        data.add(new Expense("Clothes", "2000"));
+        data.add(new Expense("Gifts", "500"));
+        data.add(new Expense("Holidays", "5000"));
         return data;
     }
 }

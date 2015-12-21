@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_header"
     android:layout_width="match_parent"
     android:layout_height="@dimen/drawer_header_img"
     android:background="@mipmap/drawer_bg"
@@ -8,50 +9,47 @@
     android:paddingBottom="@dimen/design_navigation_padding_bottom"
     android:paddingLeft="@dimen/drawer_header_padding_left"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/drawer_header_margin_t"
-    android:id="@+id/drawer_header">
+    android:paddingTop="@dimen/drawer_header_margin_t">
 
     <ImageView
+        android:id="@+id/user_avatar"
         android:layout_width="@dimen/drawer_header_avatar_size"
         android:layout_height="@dimen/drawer_header_avatar_size"
-        android:id="@+id/user_avatar"
 
-        android:src="@drawable/ic_avatar"
-        android:scaleType="fitCenter"
         android:layout_marginTop="@dimen/drawer_header_avatar_margin_top"
-        />
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_avatar" />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="@dimen/drawer_header_subtitle"
-        android:paddingTop="@dimen/drawer_header_subtitle_vertical_padding"
-        android:paddingBottom="@dimen/drawer_header_subtitle_vertical_padding"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="false"
-        android:layout_alignParentBottom="true">
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/drawer_header_subtitle_vertical_padding"
+        android:paddingTop="@dimen/drawer_header_subtitle_vertical_padding">
 
         <TextView
+            android:id="@+id/txt_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_user_name"
-            android:id="@+id/txt_user_name"
-            android:textSize="@dimen/abc_text_size_body_1_material"
-            android:includeFontPadding="false"
-            android:textColor="@color/whiteColor"
             android:fontFamily="@string/font_family_roboto_medium"
+            android:includeFontPadding="false"
+            android:text="@string/txt_user_name"
+            android:textColor="@color/whiteColor"
+            android:textSize="@dimen/abc_text_size_body_1_material"
             tools:ignore="UnusedAttribute" />
 
         <TextView
+            android:id="@+id/txt_email_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/txt_email_address"
-            android:id="@+id/txt_email_address"
             android:fontFamily="@string/font_family_roboto_regular"
-            android:textSize="@dimen/abc_text_size_body_1_material"
             android:includeFontPadding="false"
+            android:text="@string/txt_email_address"
             android:textColor="@color/whiteColor"
-            tools:ignore="UnusedAttribute"
-             />
+            android:textSize="@dimen/abc_text_size_body_1_material"
+            tools:ignore="UnusedAttribute" />
 
     </LinearLayout>
 

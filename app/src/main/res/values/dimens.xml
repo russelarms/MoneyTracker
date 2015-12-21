@@ -3,6 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="toolbar_height">56dp</dimen>
     <dimen name="drawer_margin_r">56dp</dimen>
     <dimen name="drawer_header_img">172dp</dimen>
     <dimen name="drawer_header_margin_t">25dp</dimen>
@@ -14,5 +15,6 @@
     <dimen name="drawer_header_line_spacing">4dp</dimen>
     <dimen name="card_corners_radius">2dp</dimen>
     <dimen name="card_margin">8dp</dimen>
+    <dimen name="fab_elevation">4dp</dimen>
 
 </resources>

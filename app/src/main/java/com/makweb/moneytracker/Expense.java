@@ -9,7 +9,7 @@ public class Expense {
     private String title;
     private Integer sum;
     private String date;
-    private DateFormat dateFormat=new SimpleDateFormat("dd-MM-yyyy",new Locale("ru"));
+    private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", new Locale("ru"));
 
     public Expense() {
     }
@@ -17,7 +17,7 @@ public class Expense {
     public Expense(String title, String sum) {
         this.title = title;
         this.sum = Integer.parseInt(sum);
-        this.date=dateFormat.format(Calendar.getInstance().getTime());
+        this.date = dateFormat.format(Calendar.getInstance().getTime());
     }
 
     public String getTitle() {
@@ -41,6 +41,6 @@ public class Expense {
     }
 
     public void setDate(String date) {
-        this.date=dateFormat.format(Calendar.getInstance().getTime());
+        this.date = dateFormat.format(Calendar.getInstance().getTime());
     }
 }
