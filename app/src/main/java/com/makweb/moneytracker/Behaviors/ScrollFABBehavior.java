@@ -1,4 +1,4 @@
-package com.makweb.moneytracker;
+package com.makweb.moneytracker.Behaviors;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;

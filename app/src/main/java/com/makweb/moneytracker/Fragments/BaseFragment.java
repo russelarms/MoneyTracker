@@ -1,9 +1,12 @@
-package com.makweb.moneytracker;
+package com.makweb.moneytracker.Fragments;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.view.View;
+
+import com.makweb.moneytracker.Activities.MainActivity;
+import com.makweb.moneytracker.R;
 
 public class BaseFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package com.makweb.moneytracker;
+package com.makweb.moneytracker.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.makweb.moneytracker.Activities.AddExpenseActivity_;
+import com.makweb.moneytracker.Adapters.ExpenseAdapter;
+import com.makweb.moneytracker.Models.Expense;
+import com.makweb.moneytracker.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +23,7 @@ public class ExpensesFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ExpenseAdapter expenseAdapter;
-        final View mainView = inflater.inflate(R.layout.expenses_fragment, container, false);
+        final View mainView = inflater.inflate(R.layout.fragment_expenses, container, false);
         RecyclerView expensesRecyclerView = (RecyclerView) mainView.findViewById(R.id.context_recyclerview);
         List<Expense> adapterData = getDataList();
         expenseAdapter = new ExpenseAdapter(adapterData);

@@ -1,10 +1,13 @@
-package com.makweb.moneytracker;
+package com.makweb.moneytracker.Adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.makweb.moneytracker.Models.Expense;
+import com.makweb.moneytracker.R;
 
 import java.util.List;
 
@@ -18,7 +21,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.CardView
 
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_expenses, parent, false);
         return new CardViewHolder(convertView);
     }
 

@@ -1,6 +1,5 @@
-package com.makweb.moneytracker;
+package com.makweb.moneytracker.Activities;
 
-import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -10,61 +9,78 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 
+import com.makweb.moneytracker.Fragments.BaseFragment;
+import com.makweb.moneytracker.Fragments.CategoryFragment;
+import com.makweb.moneytracker.Fragments.ExpensesFragment;
+import com.makweb.moneytracker.Fragments.SettingFragment;
+import com.makweb.moneytracker.Fragments.StatisticFragment;
+import com.makweb.moneytracker.R;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.InstanceState;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.ViewById;
+
+@EActivity(R.layout.activity_main)
+//@OptionsMenu(R.menu.drawer_menu)
 public class MainActivity extends AppCompatActivity {
 
+    private BaseFragment fragment;
     final String TAG = "main activity";
 
-    private Toolbar toolbar;
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-    private CoordinatorLayout coordinatorLayout;
-    private BaseFragment fragment;
+    @ViewById
+    Toolbar toolbar;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    @ViewById(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
 
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_container);
+    @ViewById(R.id.navigation_view)
+    NavigationView navigationView;
 
+    @ViewById(R.id.coordinator_container)
+    CoordinatorLayout coordinatorLayout;
+
+    @InstanceState
+    public Integer startActivity;
+
+    @AfterViews
+    void ready() {
         setupToolbar();
         setupDrawer();
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new ExpensesFragment()).commit();
-        }
-        Log.d(TAG, "MainActivity: onCreate()");
-
-
+        setupInitState();
     }
 
-    private void setupToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24px);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+    @OptionsItem(android.R.id.home)
+    void homeSelected(){
+        drawerLayout.openDrawer(GravityCompat.START);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            drawerLayout.openDrawer(GravityCompat.START);
-            return true;
+    public void onBackPressed() {
+        BaseFragment findingFragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.main_frame);
+        if (findingFragment != null && findingFragment instanceof ExpensesFragment) {
+            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
-        return super.onOptionsItemSelected(item);
+
+        if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+            drawerLayout.closeDrawer(Gravity.LEFT);
+        } else {
+            super.onBackPressed();
+        }
+
+    }
+
+    private void setupInitState(){
+        if (startActivity == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new ExpensesFragment()).commit();
+        }
     }
 
     private void setupDrawer() {
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -88,26 +104,18 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fragment).addToBackStack(null).commit();
-
-                item.setChecked(true);
                 drawerLayout.closeDrawers();
                 return false;
             }
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        BaseFragment findingFragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.main_frame);
-        if (findingFragment != null && findingFragment instanceof ExpensesFragment) {
-            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        }
-
-
-        if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
-            drawerLayout.closeDrawer(Gravity.LEFT);
-        } else {
-            super.onBackPressed();
+    private void setupToolbar() {
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24px);
+            actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
     }
@@ -115,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
     public  void onFragmentReady(BaseFragment fragment){
         Snackbar.make(fragment.getView(), fragment.getTitle(), Snackbar.LENGTH_SHORT).show();
     }
+
 
 
 }

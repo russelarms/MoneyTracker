@@ -20,7 +20,7 @@
         android:src="@drawable/ic_add_black_24px"
         app:layout_anchor="@id/coordinator_fragment"
         app:layout_anchorGravity="bottom|right"
-        app:layout_behavior=".ScrollFABBehavior"
+        app:layout_behavior=".Behaviors.ScrollFABBehavior"
         />
 
 

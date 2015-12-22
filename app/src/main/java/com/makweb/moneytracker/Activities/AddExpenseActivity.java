@@ -1,7 +1,9 @@
-package com.makweb.moneytracker;
+package com.makweb.moneytracker.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import com.makweb.moneytracker.R;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -31,7 +33,7 @@ public class AddExpenseActivity extends AppCompatActivity {
 
     }
 
-   /* private Toolbar toolbar;
+  /* private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

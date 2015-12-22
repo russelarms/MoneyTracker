@@ -1,4 +1,4 @@
-package com.makweb.moneytracker;
+package com.makweb.moneytracker.Models;
 
 public class Category {
 
