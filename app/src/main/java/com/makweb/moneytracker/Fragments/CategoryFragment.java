@@ -1,47 +1,50 @@
 package com.makweb.moneytracker.Fragments;
 
-import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.makweb.moneytracker.Models.Category;
 import com.makweb.moneytracker.Adapters.CategoryAdapter;
+import com.makweb.moneytracker.Models.Category;
 import com.makweb.moneytracker.R;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@EFragment(R.layout.fragment_category)
 public class CategoryFragment extends BaseFragment {
 
-    private CoordinatorLayout coordinatorLayout;
-    private FloatingActionButton floatingActionButton;
+    @ViewById(R.id.coordinator_fragment)
+    CoordinatorLayout coordinatorLayout;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        CategoryAdapter categoryAdapter;
-        View mainView = inflater.inflate(R.layout.fragment_category, container, false);
-        ListView expensesListView = (ListView) mainView.findViewById(R.id.list_view);
+    @ViewById(R.id.list_view)
+    ListView categoryListView;
+
+    @ViewById(R.id.fab)
+    FloatingActionButton floatingActionButton;
+
+    @Bean
+    CategoryAdapter categoryAdapter;
+
+    @AfterViews
+    void fragmentInit(){
         List<Category> adapterData = getDataList();
-        categoryAdapter = new CategoryAdapter(getActivity(), adapterData);
-        expensesListView.setAdapter(categoryAdapter);
+        categoryAdapter.setData(adapterData);
+        categoryListView.setAdapter(categoryAdapter);
         getActivity().setTitle("Категории");
         setItemDrawer(R.id.drawer_categories);
-        coordinatorLayout = (CoordinatorLayout) mainView.findViewById(R.id.coordinator_fragment);
-        floatingActionButton = (FloatingActionButton) mainView.findViewById(R.id.fab);
+    }
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(coordinatorLayout, "Категории", Snackbar.LENGTH_SHORT).show();
-            }
-        });
-
-        return mainView;
+    @Click(R.id.fab)
+    void fabPress(){
+        Snackbar.make(coordinatorLayout, "Категории", Snackbar.LENGTH_SHORT).show();
     }
 
     private List<Category> getDataList() {
@@ -51,6 +54,4 @@ public class CategoryFragment extends BaseFragment {
         data.add(new Category(2000, "Еда"));
         return data;
     }
-
-
 }

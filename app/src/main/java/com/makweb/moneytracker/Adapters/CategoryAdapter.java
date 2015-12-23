@@ -1,37 +1,58 @@
 package com.makweb.moneytracker.Adapters;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.widget.BaseAdapter;
 
 import com.makweb.moneytracker.Models.Category;
-import com.makweb.moneytracker.R;
+import com.makweb.moneytracker.Views.CategoryItemView;
+import com.makweb.moneytracker.Views.CategoryItemView_;
+
+import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
 
 import java.util.List;
 
-public class CategoryAdapter extends ArrayAdapter<Category> {
+@EBean
+public class CategoryAdapter extends BaseAdapter {
 
-    public CategoryAdapter(Context context, List<Category> categories) {
-        super(context, 0, categories);
+    List<Category> categories;
+
+    @RootContext
+    Context context;
+
+    public void setData(List<Category> categories){
+        this.categories=categories;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Category categories = getItem(position);
+        CategoryItemView categoriesItemView;
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_category, parent, false);
+            categoriesItemView= CategoryItemView_.build(context);
+        }else{
+            categoriesItemView = (CategoryItemView) convertView;
         }
 
-        TextView txt_name = (TextView) convertView.findViewById(R.id.txt_name);
-        TextView txt_sum = (TextView) convertView.findViewById(R.id.txt_sum);
+        categoriesItemView.bind(getItem(position));
 
-        txt_name.setText(categories.getName());
-        txt_sum.setText(String.valueOf(categories.getSum()));
+        return categoriesItemView;
+    }
 
-        return convertView;
+    @Override
+    public int getCount() {
+        return categories.size();
+    }
+
+    @Override
+    public Category getItem(int position) {
+        return categories.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 }

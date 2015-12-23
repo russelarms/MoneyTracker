@@ -32,32 +32,4 @@ public class AddExpenseActivity extends AppCompatActivity {
         }
 
     }
-
-  /* private Toolbar toolbar;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_expenses);
-        Intent intent=getIntent();
-        String value=intent.getStringExtra("key");
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            onBackPressed();
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 }

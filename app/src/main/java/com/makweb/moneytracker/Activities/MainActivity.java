@@ -13,7 +13,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 
 import com.makweb.moneytracker.Fragments.BaseFragment;
-import com.makweb.moneytracker.Fragments.CategoryFragment;
+import com.makweb.moneytracker.Fragments.CategoryFragment_;
 import com.makweb.moneytracker.Fragments.ExpensesFragment;
 import com.makweb.moneytracker.Fragments.SettingFragment;
 import com.makweb.moneytracker.Fragments.StatisticFragment;
@@ -26,7 +26,6 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.ViewById;
 
 @EActivity(R.layout.activity_main)
-//@OptionsMenu(R.menu.drawer_menu)
 public class MainActivity extends AppCompatActivity {
 
     private BaseFragment fragment;
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                         navigationView.getMenu().findItem(R.id.drawer_expenses).setChecked(true);
                         break;
                     case R.id.drawer_categories:
-                        fragment = new CategoryFragment();
+                        fragment = new CategoryFragment_();
                         navigationView.getMenu().findItem(R.id.drawer_categories).setChecked(true);
                         break;
                     case R.id.drawer_statistics:
