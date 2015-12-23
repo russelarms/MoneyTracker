@@ -1,21 +1,42 @@
 package com.makweb.moneytracker.Adapters;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.content.Context;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.makweb.moneytracker.Models.Expense;
-import com.makweb.moneytracker.R;
+import com.makweb.moneytracker.Views.ExpenseItemView;
+import com.makweb.moneytracker.Views.ExpenseItemView_;
+import com.makweb.moneytracker.Views.ViewWrapper;
 
-import java.util.List;
+import org.androidannotations.annotations.EBean;
+import org.androidannotations.annotations.RootContext;
 
+@EBean
+public class ExpenseAdapter extends RecyclerViewAdapterBase<Expense, ExpenseItemView> {
 
-public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.CardViewHolder> {
-    List<Expense> expenses;
+   // List<Expense> expenses;
 
-    public ExpenseAdapter(List<Expense> expenses) {
+    @RootContext
+    Context context;
+
+    @Override
+    protected ExpenseItemView onCreateItemView(ViewGroup parent, int viewType) {
+        return ExpenseItemView_.build(context);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewWrapper<ExpenseItemView> viewHolder, int position) {
+        ExpenseItemView view = viewHolder.getView();
+        Expense expense = items.get(position);
+
+        view.bind(expense);
+    }
+
+  /*  public void setData(List<Expense> expenses){
+        this.expenses=expenses;
+    }*/
+
+    /*public ExpenseAdapter(List<Expense> expenses) {
         this.expenses = expenses;
     }
 
@@ -51,5 +72,5 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.CardView
             txt_sum = (TextView) convertView.findViewById(R.id.txt_sum);
             txt_date = (TextView) convertView.findViewById(R.id.txt_date);
         }
-    }
+    }*/
 }

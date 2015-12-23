@@ -14,7 +14,7 @@ import android.view.MenuItem;
 
 import com.makweb.moneytracker.Fragments.BaseFragment;
 import com.makweb.moneytracker.Fragments.CategoryFragment_;
-import com.makweb.moneytracker.Fragments.ExpensesFragment;
+import com.makweb.moneytracker.Fragments.ExpensesFragment_;
 import com.makweb.moneytracker.Fragments.SettingFragment;
 import com.makweb.moneytracker.Fragments.StatisticFragment;
 import com.makweb.moneytracker.R;
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         BaseFragment findingFragment = (BaseFragment) getSupportFragmentManager().findFragmentById(R.id.main_frame);
-        if (findingFragment != null && findingFragment instanceof ExpensesFragment) {
+        if (findingFragment != null && findingFragment instanceof ExpensesFragment_) {
             getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupInitState(){
         if (startActivity == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new ExpensesFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new ExpensesFragment_()).commit();
         }
     }
 
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.drawer_expenses:
-                        fragment = new ExpensesFragment();
+                        fragment = new ExpensesFragment_();
                         navigationView.getMenu().findItem(R.id.drawer_expenses).setChecked(true);
                         break;
                     case R.id.drawer_categories:
