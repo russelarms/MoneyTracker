@@ -1,8 +1,9 @@
-package com.makweb.moneytracker;
+package com.makweb.moneytracker.Utils;
 
 import android.app.Application;
 
 import com.bettervectordrawable.VectorDrawableCompat;
+import com.makweb.moneytracker.R;
 
 public class VectorDraw extends Application {
 

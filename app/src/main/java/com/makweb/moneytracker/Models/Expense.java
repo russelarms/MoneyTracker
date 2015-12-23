@@ -1,4 +1,4 @@
-package com.makweb.moneytracker;
+package com.makweb.moneytracker.Models;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
