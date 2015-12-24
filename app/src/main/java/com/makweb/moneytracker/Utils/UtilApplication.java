@@ -1,15 +1,16 @@
 package com.makweb.moneytracker.Utils;
 
-import android.app.Application;
-
+import com.activeandroid.ActiveAndroid;
+import com.activeandroid.app.Application;
 import com.bettervectordrawable.VectorDrawableCompat;
 import com.makweb.moneytracker.R;
 
-public class VectorDraw extends Application {
 
+public class UtilApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        ActiveAndroid.initialize(this);
 
         VectorDrawableCompat.enableResourceInterceptionFor(getResources(),
                 R.drawable.ic_menu_black_24px,
@@ -20,4 +21,5 @@ public class VectorDraw extends Application {
                 R.drawable.ic_add_black_24px);
     }
 }
+
 

@@ -1,14 +1,21 @@
 package com.makweb.moneytracker.Fragments;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.activeandroid.ActiveAndroid;
+import com.activeandroid.query.Select;
 import com.makweb.moneytracker.Activities.AddExpenseActivity_;
 import com.makweb.moneytracker.Adapters.ExpenseAdapter;
-import com.makweb.moneytracker.Models.Expense;
+import com.makweb.moneytracker.Models.Categories;
+import com.makweb.moneytracker.Models.Expenses;
 import com.makweb.moneytracker.R;
 
 import org.androidannotations.annotations.AfterViews;
@@ -17,7 +24,6 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @EFragment(R.layout.fragment_expenses)
@@ -32,12 +38,26 @@ public class ExpensesFragment extends BaseFragment {
     @Bean
     ExpenseAdapter expenseAdapter;
 
-    @AfterViews
-    void fragmentInit(){
-        List<Expense> adapterData = getDataList();
-        expenseAdapter.setData(adapterData);
+    /*@Bean
+    Expenses exspenses;*/
 
-        expensesRecyclerView.setAdapter(expenseAdapter);
+    @AfterViews
+    void fragmentInit() {
+        // List<Expense> adapterData = getDataList();
+        //Expenses expenses = new Expenses();
+        /*expenses.price=12.0;
+        expenses.name="cinema";
+        Categories categoriesFun=new Categories("Fun");
+        categoriesFun.save();
+        expenses.category= categoriesFun;
+        expenses.date="11-11-11";
+        expenses.save();*/
+
+        //Expenses expenses1=getExpenses();
+        //Log.e("MODEL", String.valueOf(expenses1));
+        //expenseAdapter.setData(adapterData);
+
+        //expensesRecyclerView.setAdapter(expenseAdapter);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         expensesRecyclerView.setLayoutManager(gridLayoutManager);
@@ -46,62 +66,75 @@ public class ExpensesFragment extends BaseFragment {
     }
 
     @Click(R.id.fab)
-    void fabPress(){
-        Intent intent=new Intent(getActivity(), AddExpenseActivity_.class);
-        intent.putExtra("key","value");
+    void fabPress() {
+        Intent intent = new Intent(getActivity(), AddExpenseActivity_.class);
+        intent.putExtra("key", "value");
         startActivity(intent);
     }
 
-    private List<Expense> getDataList() {
-        List<Expense> data = new ArrayList<>();
-        data.add(new Expense("Phone", "1000"));
-        data.add(new Expense("Clothes", "2000"));
-        data.add(new Expense("Gifts", "500"));
-        data.add(new Expense("Holidays", "5000"));
-        data.add(new Expense("Clothes", "2000"));
-        data.add(new Expense("Gifts", "500"));
-        data.add(new Expense("Holidays", "5000"));
-        data.add(new Expense("Clothes", "2000"));
-        data.add(new Expense("Gifts", "500"));
-        data.add(new Expense("Holidays", "5000"));
-        data.add(new Expense("Clothes", "2000"));
-        data.add(new Expense("Gifts", "500"));
-        data.add(new Expense("Holidays", "5000"));
-        data.add(new Expense("Clothes", "2000"));
-        data.add(new Expense("Gifts", "500"));
-        data.add(new Expense("Holidays", "5000"));
-        data.add(new Expense("Phone", "1000"));
-        data.add(new Expense("Clothes", "2000"));
-        data.add(new Expense("Gifts", "500"));
-        data.add(new Expense("Holidays", "5000"));
-        data.add(new Expense("Clothes", "2000"));
-        data.add(new Expense("Gifts", "500"));
-        data.add(new Expense("Holidays", "5000"));
-        data.add(new Expense("Clothes", "2000"));
-        data.add(new Expense("Gifts", "500"));
-        data.add(new Expense("Holidays", "5000"));
-        data.add(new Expense("Clothes", "2000"));
-        data.add(new Expense("Gifts", "500"));
-        data.add(new Expense("Holidays", "5000"));
-        data.add(new Expense("Clothes", "2000"));
-        data.add(new Expense("Gifts", "500"));
-        data.add(new Expense("Holidays", "5000"));
-        data.add(new Expense("Phone", "1000"));
-        data.add(new Expense("Clothes", "2000"));
-        data.add(new Expense("Gifts", "500"));
-        data.add(new Expense("Holidays", "5000"));
-        data.add(new Expense("Clothes", "2000"));
-        data.add(new Expense("Gifts", "500"));
-        data.add(new Expense("Holidays", "5000"));
-        data.add(new Expense("Clothes", "2000"));
-        data.add(new Expense("Gifts", "500"));
-        data.add(new Expense("Holidays", "5000"));
-        data.add(new Expense("Clothes", "2000"));
-        data.add(new Expense("Gifts", "500"));
-        data.add(new Expense("Holidays", "5000"));
-        data.add(new Expense("Clothes", "2000"));
-        data.add(new Expense("Gifts", "500"));
-        data.add(new Expense("Holidays", "5000"));
-        return data;
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadData();
     }
+
+    void generateData() {
+        ActiveAndroid.beginTransaction();
+        try {
+            for (int i = 0; i < 100; i++) {
+                Expenses item = new Expenses();
+                item.setPrice(12.0 + i * 0.1);
+                item.setName("Example " + i);
+                Categories categoryItem = new Categories();
+                categoryItem.setName("что то");
+                item.setDate("11-11-11");
+                item.save();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        } finally {
+            ActiveAndroid.endTransaction();
+        }
+    }
+
+    private List<Expenses> getDataList() {
+        return new Select()
+                .from(Expenses.class)
+                .execute();
+    }
+
+    private void loadData() {
+        getLoaderManager().restartLoader(0, null, new LoaderManager.LoaderCallbacks<List<Expenses>>() {
+            @Override
+            public Loader<List<Expenses>> onCreateLoader(int id, Bundle args) {
+                final AsyncTaskLoader<List<Expenses>> loader = new AsyncTaskLoader<List<Expenses>>(getActivity()) {
+                    @Override
+                    public List<Expenses> loadInBackground() {
+                        return getDataList();
+                    }
+                };
+
+                loader.forceLoad();
+                return loader;
+            }
+
+            @Override
+            public void onLoadFinished(Loader<List<Expenses>> loader, List<Expenses> data) {
+                ExpenseAdapter expenseAdapter = new ExpenseAdapter();
+                //expenseAdapter.setData(data);
+                //Log.e("AD", String.valueOf(expenseAdapter));
+                expensesRecyclerView.setAdapter(expenseAdapter);
+            }
+
+            @Override
+            public void onLoaderReset(Loader<List<Expenses>> loader) {
+
+            }
+        });
+    }
+
+    /*public Expenses getExpenses(){
+        return new Select()
+                .from(Expenses.class)
+                .executeSingle();
+    }*/
 }

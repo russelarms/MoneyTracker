@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.makweb.moneytracker.Models.Expense;
+import com.makweb.moneytracker.Models.Expenses;
 import com.makweb.moneytracker.R;
 
 import org.androidannotations.annotations.EViewGroup;
@@ -27,9 +27,9 @@ public class ExpenseItemView extends RelativeLayout {
         super(context);
     }
 
-    public void bind(Expense expenses){
-        txt_name.setText(expenses.getTitle());
-        txt_sum.setText(String.valueOf(expenses.getSum()));
+    public void bind(Expenses expenses){
+        txt_name.setText(expenses.getName());
+        txt_sum.setText(String.valueOf(expenses.getPrice()));
         txt_date.setText(expenses.getDate());
     }
 }

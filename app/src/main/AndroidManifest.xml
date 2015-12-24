@@ -3,11 +3,18 @@
     package="com.makweb.moneytracker" >
 
     <application
-        android:name=".Utils.VectorDraw"
+        android:name=".Utils.UtilApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+
+        <meta-data android:name="AA_DB_NAME" android:value="MoneyTrackerDB.db" />
+        <meta-data android:name="AA_DB_VERSION" android:value="1" />
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="com.makweb.moneytracker.Models.Expenses,
+            com.makweb.moneytracker.Models.Categories"/>
 
         <activity
             android:name=".Activities.MainActivity_"
@@ -24,6 +31,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activities.MainActivity_"/>
         </activity>
+
+
     </application>
 
 
