@@ -38,20 +38,16 @@ public class ExpensesFragment extends BaseFragment {
     @Bean
     ExpenseAdapter expenseAdapter;
 
-    /*@Bean
-    Expenses exspenses;*/
-
     @AfterViews
     void fragmentInit() {
-        // List<Expense> adapterData = getDataList();
-        //Expenses expenses = new Expenses();
-        /*expenses.price=12.0;
-        expenses.name="cinema";
+        Expenses expenses = new Expenses();
+        expenses.setPrice(12.0);
+        expenses.setName("cinema");
         Categories categoriesFun=new Categories("Fun");
         categoriesFun.save();
-        expenses.category= categoriesFun;
-        expenses.date="11-11-11";
-        expenses.save();*/
+        expenses.setCategory(categoriesFun);
+        expenses.setDate("12-12-12");
+        expenses.save();
 
         //Expenses expenses1=getExpenses();
         //Log.e("MODEL", String.valueOf(expenses1));
@@ -119,9 +115,7 @@ public class ExpensesFragment extends BaseFragment {
 
             @Override
             public void onLoadFinished(Loader<List<Expenses>> loader, List<Expenses> data) {
-                ExpenseAdapter expenseAdapter = new ExpenseAdapter();
-                //expenseAdapter.setData(data);
-                //Log.e("AD", String.valueOf(expenseAdapter));
+                expenseAdapter.setData(data);
                 expensesRecyclerView.setAdapter(expenseAdapter);
             }
 
@@ -131,10 +125,4 @@ public class ExpensesFragment extends BaseFragment {
             }
         });
     }
-
-    /*public Expenses getExpenses(){
-        return new Select()
-                .from(Expenses.class)
-                .executeSingle();
-    }*/
 }

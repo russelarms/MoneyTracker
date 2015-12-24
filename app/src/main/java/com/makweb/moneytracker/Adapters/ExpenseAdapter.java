@@ -11,11 +11,18 @@ import com.makweb.moneytracker.Views.ViewWrapper;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
+import java.util.List;
+
 @EBean
 public class ExpenseAdapter extends RecyclerViewAdapterBase<Expenses, ExpenseItemView> {
 
     @RootContext
     Context context;
+
+    @Override
+    public void setData(List<Expenses> items) {
+        super.setData(items);
+    }
 
     @Override
     protected ExpenseItemView onCreateItemView(ViewGroup parent, int viewType) {

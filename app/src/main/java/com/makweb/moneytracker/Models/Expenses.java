@@ -6,7 +6,6 @@ import com.activeandroid.annotation.Table;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Locale;
 
 @Table(name = "Expenses")
@@ -32,13 +31,12 @@ public class Expenses extends Model {
     public Expenses(Double price, String name, String date, Categories category) {
         this.price = price;
         this.name = name;
-        if (date == null) {
-            this.date = dateFormat.format(Calendar.getInstance().getTime());
-        } else {
-            this.date = date;
-        }
+        this.date = date;
         this.category = category;
     }
+
+
+    //Setters and Getters
 
     public Double getPrice() {
         return price;
@@ -65,11 +63,7 @@ public class Expenses extends Model {
     }
 
     public void setDate(String date) {
-        if (date == null) {
-            this.date = dateFormat.format(Calendar.getInstance().getTime());
-        } else {
             this.date = date;
-        }
     }
 
     public void setCategory(Categories category) {
