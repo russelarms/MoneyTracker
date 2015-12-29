@@ -29,50 +29,67 @@
         android:padding="@dimen/activity_horizontal_margin">
 
         <TextView
+            style="@style/FontM.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="fill"
-            android:text="Сумма" />
+            android:text="@string/expenses_price" />
 
         <EditText
+            style="@style/FontM.Regular"
+            android:id="@+id/ted_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="1000" />
+            android:hint="@string/expenses_price_hint" />
 
         <TextView
+            style="@style/FontM.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="fill"
-            android:text="Примечание" />
+            android:text="@string/expenses_name" />
 
         <EditText
+            style="@style/FontM.Regular"
+            android:id="@+id/ted_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="1000" />
+            android:hint="@string/expenses_name_hint" />
 
         <TextView
+            style="@style/FontM.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="fill"
-            android:text="Выбор категории" />
+            android:text="@string/expenses_category" />
 
-        <EditText
+        <Spinner
+            style="@style/FontM.Medium"
+            android:id="@+id/spin_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="1000" />
+            android:hint="@string/expenses_category_hint">
+        </Spinner>
+
+        <!--<EditText
+            style="@style/FontM.Regular"
+            android:id="@+id/ted_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/expenses_category_hint" />-->
 
         <TextView
-
+            style="@style/FontM.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="fill"
-            android:text="Дата" />
+            android:text="@string/expenses_date" />
 
         <EditText
+            style="@style/FontM.Regular"
             android:id="@+id/ted_date"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="11-12-12" />
+            android:layout_height="wrap_content"/>
 
     </GridLayout>
 

@@ -13,7 +13,7 @@ public class Expenses extends Model {
     private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", new Locale("ru"));
 
     @Column(name = "price")
-    private Double price;
+    private int price;
 
     @Column(name = "name")
     private String name;
@@ -28,7 +28,7 @@ public class Expenses extends Model {
         super();
     }
 
-    public Expenses(Double price, String name, String date, Categories category) {
+    public Expenses(int price, String name, String date, Categories category) {
         this.price = price;
         this.name = name;
         this.date = date;
@@ -38,7 +38,7 @@ public class Expenses extends Model {
 
     //Setters and Getters
 
-    public Double getPrice() {
+    public int getPrice() {
         return price;
     }
 
@@ -54,7 +54,7 @@ public class Expenses extends Model {
         return category;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

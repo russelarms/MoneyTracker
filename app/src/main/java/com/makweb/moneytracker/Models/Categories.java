@@ -7,7 +7,7 @@ import com.activeandroid.annotation.Table;
 
 import java.util.List;
 
-@Table(name="categories")
+@Table(name="Categories")
 public class Categories extends Model{
 
     public Categories(){
@@ -33,6 +33,4 @@ public class Categories extends Model{
     public void setName(String name) {
         this.name = name;
     }
-
-
 }

@@ -12,18 +12,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 
+import com.activeandroid.ActiveAndroid;
 import com.makweb.moneytracker.Fragments.BaseFragment;
 import com.makweb.moneytracker.Fragments.CategoryFragment_;
 import com.makweb.moneytracker.Fragments.ExpensesFragment_;
 import com.makweb.moneytracker.Fragments.SettingFragment;
 import com.makweb.moneytracker.Fragments.StatisticFragment;
+import com.makweb.moneytracker.Models.Categories;
 import com.makweb.moneytracker.R;
+import com.makweb.moneytracker.database.DB;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.InstanceState;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.ViewById;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
@@ -51,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setupToolbar();
         setupDrawer();
         setupInitState();
+        generateCategory();
     }
 
     @OptionsItem(android.R.id.home)
@@ -123,6 +130,27 @@ public class MainActivity extends AppCompatActivity {
         Snackbar.make(fragment.getView(), fragment.getTitle(), Snackbar.LENGTH_SHORT).show();
     }
 
+    void generateCategory() {
+        DB.dropTableCategories();
 
+        List categoriesName = new ArrayList();
+        categoriesName.add("Одежда");
+        categoriesName.add("Книги");
+        categoriesName.add("Игры");
+        categoriesName.add("Развлечения");
+        categoriesName.add("Сигареты");
+        categoriesName.add("Прочее");
+        ActiveAndroid.beginTransaction();
+        try {
+            for (int i = 0; i < categoriesName.size() ; i++) {
+                Categories item = new Categories();
+                item.setName(String.valueOf(categoriesName.get(i)));
+                item.save();
+            }
+            ActiveAndroid.setTransactionSuccessful();
+        } finally {
+            ActiveAndroid.endTransaction();
+        }
+    }
 
 }

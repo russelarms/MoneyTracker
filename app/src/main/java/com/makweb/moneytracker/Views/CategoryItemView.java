@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.makweb.moneytracker.Models.Category;
+import com.makweb.moneytracker.Models.Categories;
 import com.makweb.moneytracker.R;
 
 import org.androidannotations.annotations.EViewGroup;
@@ -23,8 +23,8 @@ public class CategoryItemView extends RelativeLayout{
         super(context);
     }
 
-    public void bind(Category categories){
+    public void bind(Categories categories){
         txt_name.setText(categories.getName());
-        txt_sum.setText(String.valueOf(categories.getSum()));
+        //txt_sum.setText(String.valueOf(categories.getSum()));
     }
 }

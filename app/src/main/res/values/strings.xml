@@ -14,4 +14,11 @@
 
     <string name="font_family_roboto_regular">sans-serif</string>
     <string name="font_family_roboto_medium">sans-serif-medium</string>
+    <string name="expenses_name">Название траты</string>
+    <string name="expenses_price">Сумма</string>
+    <string name="expenses_price_hint">1000</string>
+    <string name="expenses_name_hint">На что потратил</string>
+    <string name="expenses_category">Категории</string>
+    <string name="expenses_category_hint">Выбери категорию</string>
+    <string name="expenses_date">Дата</string>
 </resources>

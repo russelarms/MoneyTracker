@@ -39,10 +39,17 @@
         <item name="android:background">@color/colorAccent</item>
     </style>
 
-    <!-- <style name="Container.Formatted">
-         <item name="android:background">@color/whiteColor</item>
-         <item name="android:padding">@dimen/activity_vertical_margin</item>
-     </style>-->
+    <style name="FontM">
+        <item name="android:textSize">@dimen/abc_text_size_body_1_material</item>
+    </style>
+
+    <style name="FontM.Medium">
+        <item name="android:fontFamily">@string/font_family_roboto_medium</item>
+    </style>
+
+    <style name="FontM.Regular">
+        <item name="android:fontFamily">@string/font_family_roboto_regular</item>
+    </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 

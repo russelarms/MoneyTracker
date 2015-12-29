@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.makweb.moneytracker.Models.Category;
+import com.makweb.moneytracker.Models.Categories;
 import com.makweb.moneytracker.Views.CategoryItemView;
 import com.makweb.moneytracker.Views.CategoryItemView_;
 
@@ -17,12 +17,12 @@ import java.util.List;
 @EBean
 public class CategoryAdapter extends BaseAdapter {
 
-    List<Category> categories;
+    List<Categories> categories;
 
     @RootContext
     Context context;
 
-    public void setData(List<Category> categories){
+    public void setData(List<Categories> categories){
         this.categories=categories;
     }
 
@@ -47,7 +47,7 @@ public class CategoryAdapter extends BaseAdapter {
     }
 
     @Override
-    public Category getItem(int position) {
+    public Categories getItem(int position) {
         return categories.get(position);
     }
 
