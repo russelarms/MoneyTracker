@@ -33,4 +33,5 @@ public class Categories extends Model{
     public void setName(String name) {
         this.name = name;
     }
+
 }

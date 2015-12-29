@@ -14,7 +14,14 @@ import java.util.List;
         return new Select()
                 .from(Categories.class)
                 .execute();
-    }
+     }
+
+     public static Categories getCategoryByName(String name) {
+         return new Select()
+                 .from(Categories.class)
+                 .where("name = ?", name)
+                 .executeSingle();
+     }
 
      public static List<Expenses> getDataListExpenses() {
          return new Select()

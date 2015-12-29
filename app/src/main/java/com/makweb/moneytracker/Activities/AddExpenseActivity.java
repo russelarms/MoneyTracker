@@ -1,10 +1,10 @@
 package com.makweb.moneytracker.Activities;
 
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,6 +36,9 @@ import java.util.Locale;
 
 public class AddExpenseActivity extends AppCompatActivity {
     private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", new Locale("ru"));
+    private List<Categories> data;
+    private List<String> dataStr = new ArrayList<>();
+//    private List<TextView>
 
     @ViewById
     Toolbar toolbar;
@@ -52,20 +55,23 @@ public class AddExpenseActivity extends AppCompatActivity {
     @ViewById(R.id.spin_category)
     Spinner spinnerCategory;
 
+    @ViewById(R.id.coordinator_container)
+    CoordinatorLayout coordinatorContainer;
+
     @Bean
     CategoryAdapter categoryAdapter;
 
     @OptionsItem(android.R.id.home)
     void back() {
-        Log.e("Back", "dfhgdch");
-        insertData();
-        onBackPressed();
-        finish();
+        if (isFieldNotNull(new TextView[]{tedDate, tedName, tedPrice})){
+            insertData();
+            onBackPressed();
+            finish();
+        }
+        else {
+            Snackbar.make(coordinatorContainer, "Заполните все поля", Snackbar.LENGTH_SHORT).show();
+        }
     }
-
-    List<Categories> data;
-    List<String> dataStr = new ArrayList<>();
-
 
     @AfterViews
     void ready() {
@@ -76,6 +82,31 @@ public class AddExpenseActivity extends AppCompatActivity {
         }
         String now=dateFormat.format(Calendar.getInstance().getTime());
         tedDate.setText(now);
+        setupSpinner();
+    }
+
+    @Click(R.id.ted_date)
+    void datePicker(){
+        DialogFragment datePickerFragment = new DatePickerFragment();
+        datePickerFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    public void setDateFromDatePicker(String date) {
+        tedDate.setText(date);
+    }
+
+    private void insertData(){
+        Expenses expenses = new Expenses();
+        expenses.setPrice(Integer.parseInt(String.valueOf(tedPrice.getText())));
+        expenses.setName(String.valueOf(tedName.getText()));
+        String item = spinnerCategory.getSelectedItem().toString();
+        Categories category = DB.getCategoryByName(item);
+        expenses.setCategory(category);
+        expenses.setDate(String.valueOf(tedDate.getText()));
+        expenses.save();
+    }
+
+    private void setupSpinner(){
         Categories categories = new Categories();
         data = DB.getDataListCategories();
         for (Categories c : data) {
@@ -97,27 +128,19 @@ public class AddExpenseActivity extends AppCompatActivity {
         });
     }
 
-    @Click(R.id.ted_date)
-    void datePicker(){
-        DialogFragment datePickerFragment = new DatePickerFragment();
-        datePickerFragment.show(getSupportFragmentManager(), "datePicker");
-    }
+    private boolean isFieldNotNull(TextView[] field){
+        boolean flag = true;
 
-    public void setDateFromDatePicker(String date) {
-        tedDate.setText(date);
-    }
+        for (TextView f : field) {
+            CharSequence a = f.getText();
+            if (f.getText().length()==0){
+                flag=false;
+                break;
+            }
+        }
 
-    private void insertData(){
-        Expenses expenses = new Expenses();
-        expenses.setPrice(Integer.parseInt(String.valueOf(tedPrice.getText())));
-        expenses.setName(String.valueOf(tedName.getText()));
-        Categories categoriesFun=new Categories("Fun");
-        categoriesFun.save();
-        expenses.setCategory(categoriesFun);
-        expenses.setDate(String.valueOf(tedDate.getText()));
-        expenses.save();
+        return flag;
     }
-
 
 
 

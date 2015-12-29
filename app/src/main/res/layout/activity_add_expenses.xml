@@ -26,11 +26,15 @@
         android:layout_marginTop="@dimen/toolbar_height"
         android:background="@color/whiteColor"
         android:columnCount="2"
-        android:padding="@dimen/activity_horizontal_margin">
+        android:padding="@dimen/activity_horizontal_margin"
+        android:rowCount="4"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="false"
+        android:useDefaultMargins="true">
 
         <TextView
             style="@style/FontM.Medium"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/expenses_width"
             android:layout_height="wrap_content"
             android:gravity="fill"
             android:text="@string/expenses_price" />
@@ -40,11 +44,12 @@
             android:id="@+id/ted_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/expenses_price_hint" />
+            android:hint="@string/expenses_price_hint"
+            android:inputType="numberDecimal" />
 
         <TextView
             style="@style/FontM.Medium"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/expenses_width"
             android:layout_height="wrap_content"
             android:gravity="fill"
             android:text="@string/expenses_name" />
@@ -54,11 +59,12 @@
             android:id="@+id/ted_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/expenses_name_hint" />
+            android:hint="@string/expenses_name_hint"
+            android:inputType="text" />
 
         <TextView
             style="@style/FontM.Medium"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/expenses_width"
             android:layout_height="wrap_content"
             android:gravity="fill"
             android:text="@string/expenses_category" />
@@ -71,16 +77,9 @@
             android:hint="@string/expenses_category_hint">
         </Spinner>
 
-        <!--<EditText
-            style="@style/FontM.Regular"
-            android:id="@+id/ted_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/expenses_category_hint" />-->
-
         <TextView
             style="@style/FontM.Medium"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/expenses_width"
             android:layout_height="wrap_content"
             android:gravity="fill"
             android:text="@string/expenses_date" />
